@@ -2,11 +2,14 @@
 import { RouterView } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue'
 
-const { loginWithRedirect, user, isAuthenticated } = useAuth0()
-const { logout } = useAuth0()
+const { loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0()
 
 const login = () => {
-  loginWithRedirect()
+  loginWithRedirect({
+    authorizationParams: {
+      redirect_uri: window.location.origin + '/dashboard',
+    },
+  })
 }
 
 const handleLogout = () => {
@@ -17,15 +20,16 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <div v-if="!isAuthenticated">
-    <button @click="login">Log in</button>
-  </div>
-  <div v-if="isAuthenticated">
-    <button @click="handleLogout">Log out</button>
-    <p>{{ user?.email }}</p>
+  <div v-if="isLoading" class="flex justify-center items-center h-screen">
+    <p>Loading...</p>
   </div>
 
-  <RouterView />
+  <div v-else>
+    <div v-if="isAuthenticated">
+      <button @click="handleLogout">Log out</button>
+    </div>
+    <RouterView :login="login" :handleLogout="handleLogout" :isAuthenticated="isAuthenticated" />
+  </div>
 </template>
 
 <style scoped>

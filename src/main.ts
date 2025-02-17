@@ -17,7 +17,7 @@ app.use(
     // to hide
     clientId: 'Pcl1gwhhsCAHFXabO59OzZQSXaUO9tl1',
     authorizationParams: {
-      redirect_uri: window.location.origin,
+      redirect_uri: window.location.origin + '/dashboard',
     },
   }),
 )
