@@ -25,10 +25,12 @@ const handleLogout = () => {
   </div>
 
   <div v-else>
-    <div v-if="isAuthenticated">
-      <button @click="handleLogout">Log out</button>
+    <div v-if="isAuthenticated" class="mt-4 w-full flex justify-end">
+      <v-btn variant="text" prependIcon="mdi-logout" @click="handleLogout">Log out</v-btn>
     </div>
-    <RouterView :login="login" :handleLogout="handleLogout" :isAuthenticated="isAuthenticated" />
+    <v-app>
+      <RouterView :login="login" :handleLogout="handleLogout" :isAuthenticated="isAuthenticated" />
+    </v-app>
   </div>
 </template>
 
