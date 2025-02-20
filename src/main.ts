@@ -17,9 +17,9 @@ app.use(vuetify);
 app.use(
   createAuth0({
     // to hide
-    domain: 'dev-qfp23kv6.us.auth0.com',
+    domain: import.meta.env.AUTH0_DOMAIN,
     // to hide
-    clientId: 'Pcl1gwhhsCAHFXabO59OzZQSXaUO9tl1',
+    clientId: import.meta.env.AUT0_CLIENT_ID,
     authorizationParams: {
       redirect_uri: window.location.origin + '/dashboard',
     },
